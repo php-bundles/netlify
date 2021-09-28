@@ -5,19 +5,11 @@ exports.handler = async event => {
   
   console.log('path: ', path, '; referer: ', referer, '; userAgent: ', userAgent);
 
-  if (referer.includes('facebook') && userAgent.includes('android')) {
-    return {
-      statusCode: 301,
-      headers: {
-        location: process.env.URL + path
-      }
-    }
-  } else {
-    return {
-      statusCode: 301,
-      headers: {
-        location: process.env.URL + path
-      }
+  //if (referer.includes('facebook') && userAgent.includes('android')) {
+  return {
+    statusCode: 301,
+    headers: {
+      location: 'https://embroiderio.com' + path
     }
   }
 }
