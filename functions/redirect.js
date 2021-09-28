@@ -12,7 +12,7 @@ exports.handler = async event => {
     return {
       statusCode: 301,
       headers: {
-        location: 'https://embroiderio.com/' + pathName[0] + '/' + pathName[1]
+        location: process.env.URL + pathName[0] + '/' + pathName[1]
       }
     }
   }
