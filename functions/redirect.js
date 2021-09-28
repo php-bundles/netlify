@@ -3,18 +3,15 @@ function httpGet(url) {
     const client = require('https');
 
     client.get(url, (resp) => {
-      let chunks = [];
+      let data = '';
 
       resp.on('data', (chunk) => {
-        chunks.push(chunk);
+        data += chunk;
       });
 
       resp.on('end', () => {
-        resolve(Buffer.concat(chunks));
+        resolve(data);
       });
-
-    }).on("error", (err) => {
-      reject(err);
     });
   });
 }
