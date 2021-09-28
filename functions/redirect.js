@@ -18,10 +18,8 @@ exports.handler = async event => {
     }
   } else {
     return {
-      statusCode: 301,
-      headers: {
-        location: 'https://embroiderio.com' + path
-      }
+      statusCode: 200,
+      body: '<html>111</html>'
     }
   }
 }
