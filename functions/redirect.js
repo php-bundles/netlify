@@ -7,6 +7,7 @@ function httpGet(url) {
 
       resp.on('data', (chunk) => {
         data += chunk;
+  console.log(chunk);
       });
 
       resp.on('end', () => {
@@ -33,8 +34,12 @@ exports.handler = async event => {
     }
   }
   
+  const response = await httpGet(endpoint)
+  
+  console.log(response);
+  
   return {
     statusCode: 200,
-    body: await httpGet(endpoint)
+    body: response
   }
 }
