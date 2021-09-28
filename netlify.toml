@@ -1,6 +1,5 @@
 [build]
   command = "cd ./functions/ && npm install node-fetch"
-and i
 
 [functions]
   directory = "functions/"
