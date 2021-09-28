@@ -7,7 +7,7 @@ exports.handler = async event => {
 
   // https://embroiderio.netlify.app/category/korysno/
   
-  if (referer.includes('facebookexternalhit')) {
+  if (userAgent.includes('facebookexternalhit')) {
   
   } else if (referer.includes('facebook') && userAgent.includes('android')) {
     return {
