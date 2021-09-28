@@ -1,4 +1,23 @@
-const { fetch } = require('node-fetch')
+function httpGet(url) {
+  return new Promise((resolve, reject) => {
+    const client = require('https');
+
+    client.get(url, (resp) => {
+      let chunks = [];
+
+      resp.on('data', (chunk) => {
+        chunks.push(chunk);
+      });
+
+      resp.on('end', () => {
+        resolve(Buffer.concat(chunks));
+      });
+
+    }).on("error", (err) => {
+      reject(err);
+    });
+  });
+}
 
 exports.handler = async event => {  
   const path = event.path || ''
@@ -17,12 +36,8 @@ exports.handler = async event => {
     }
   }
   
-  // userAgent.includes('facebookexternalhit')
-  const response = await fetch(endpoint);
-  const body = await response.text();
-  
   return {
     statusCode: 200,
-    body: body
+    body: await httpGet(endpoint)
   }
 }
