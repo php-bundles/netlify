@@ -1,5 +1,6 @@
 exports.handler = async event => {
-  const fetch = require('node-fetch');
+  import fetch from "node-fetch";
+  
   const path = event.path || ''
   const referer = event.headers.referer || ''
   const userAgent = (event.headers['user-agent'] || '').toLowerCase()
