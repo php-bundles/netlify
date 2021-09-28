@@ -24,7 +24,7 @@ exports.handler = async event => {
 
   console.log('path: ', path, '; referer: ', referer, '; userAgent: ', userAgent);
   
-  if (referer.includes('facebook')) { // && userAgent.includes('android')
+  if (referer.includes('facebook') && !userAgent.includes('facebookexternalhit')) { // && userAgent.includes('android')
     return {
       statusCode: 301,
       headers: {
