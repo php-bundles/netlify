@@ -1,6 +1,4 @@
 exports.handler = async event => {
-  // https://embroiderio.netlify.app/.netlify/functions/redirect
-  
   const path = event.queryStringParameters.url || ''
   const referer = event.headers.referer || ''
   const userAgent = (event.headers['user-agent'] || '').toLowerCase()
