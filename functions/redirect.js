@@ -1,28 +1,24 @@
 exports.handler = async event => {
   // https://embroiderio.netlify.app/.netlify/functions/redirect
   
-  const path = event.queryStringParameters || ''
+  const path = event.queryStringParameters.url || ''
   const referer = event.headers.referer || ''
-  const userAgent = event.headers['user-agent'] || ''
+  const userAgent = (event.headers['user-agent'] || '').toLowerCase()
   
-  console.log('path: ', path);
-  console.log('referer: ', referer);
-  console.log('userAgent: ', userAgent);
-  
-  if (referer.includes('facebook')) {
+  console.log('path: ', path, '; referer: ', referer, '; userAgent: ', userAgent);
+
+  if (referer.includes('facebook') && userAgent.includes('android')) {
     return {
       statusCode: 301,
       headers: {
-        location: 'https://www.google.com/'
+        location: process.env.URL + path
       }
     }
   } else {
-    let pathName = location.pathname.split('/')[2].split('-')
-    
     return {
       statusCode: 301,
       headers: {
-        location: process.env.URL + pathName[0] + '/' + pathName[1]
+        location: process.env.URL + path
       }
     }
   }
