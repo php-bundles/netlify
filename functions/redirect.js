@@ -1,5 +1,5 @@
 exports.handler = async event => {
-  import fetch from "node-fetch";
+  import { fetch } from "node-fetch";
   
   const path = event.path || ''
   const referer = event.headers.referer || ''
