@@ -1,9 +1,15 @@
-exports.handler = async (event, context) => {
-  console.log(event, context);
-  console.log(event.headers);
+exports.handler = async event => {
   // https://embroiderio.netlify.app/.netlify/functions/redirect
   
-  if (event.headers.referer.includes('facebook')) {
+  const path = event.queryStringParameters || ''
+  const referer = event.headers.referer || ''
+  const userAgent = event.headers['user-agent'] || ''
+  
+  console.log('path: ', path);
+  console.log('referer: ', referer);
+  console.log('userAgent: ', userAgent);
+  
+  if (referer.includes('facebook')) {
     return {
       statusCode: 301,
       headers: {
