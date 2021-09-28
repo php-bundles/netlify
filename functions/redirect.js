@@ -1,25 +1,28 @@
+const fetch = request('node-fetch').default
+
 exports.handler = async event => {
   const path = event.path || ''
   const referer = event.headers.referer || ''
   const userAgent = (event.headers['user-agent'] || '').toLowerCase()
+  const endpoint = 'https://embroiderio.com' + path
 
   console.log('path: ', path, '; referer: ', referer, '; userAgent: ', userAgent);
-
-  // https://embroiderio.netlify.app/category/korysno/
   
-  if (userAgent.includes('facebookexternalhit')) {
-  
-  } else if (referer.includes('facebook') && userAgent.includes('android')) {
+  if (referer.includes('facebook')) { // && userAgent.includes('android')
     return {
       statusCode: 301,
       headers: {
-        location: 'https://embroiderio.com' + path
+        location: endpoint
       }
     }
-  } else {
-    return {
-      statusCode: 200,
-      body: '<html>111</html>'
-    }
+  }
+  
+  // userAgent.includes('facebookexternalhit')
+  const response = await fetch(endpoint);
+  const body = await response.text();
+  
+  return {
+    statusCode: 200,
+    body: body
   }
 }
