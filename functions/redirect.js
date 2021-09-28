@@ -1,4 +1,4 @@
-const fetch = require('node-fetch').default
+const fetch = require('node-fetch')
 
 exports.handler = async event => {
   const path = event.path || ''
